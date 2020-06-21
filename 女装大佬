@@ -1,0 +1,13 @@
+double tempX1, tempY1, tempX2, tempY2;
+			m_pTempLine->m_StartPoint.GetRealPos(tempX1, tempY1);
+			if (fabs(vX - tempX1) > MIN_WORLD_VALUE || fabs(vY - tempY1) > MIN_WORLD_VALUE)
+			{
+				m_pTempLine->m_EndPoint.SetRealPos(vX, vY);
+				m_pTempLine->m_EndPoint.GetRealPos(tempX2, tempY2);
+				m_Angle1 = atan2(tempY2 - tempY1, tempX2 - tempX1);//旋转的起始角度
+				szTemp.Format(_T("旋转 第一结束点 坐标 (%.3f,%.3f,%.3f)"), vX, vY, m_dSysZ);
+				m_pSystem->AddCmdTip(szTemp);
+				::WriteLog(szTemp, gszCADLogFolder);
+			}
+			m_pTempLine->SetCurStepInfo(gszTipCmdRotate3);
+			m_pSystem->AddCmdTip(gszTipCmdRotate3);
